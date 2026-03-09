@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { db } from './firebase';
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { db, auth } from './firebase';
 import './index.css';
 import logoImg from './assets/logo.PNG';
 import profileImg from './assets/profile.jpg';
@@ -20,7 +23,10 @@ const initialAbout = 'Sou estudante universitária cursando Design Digital, busc
 
 const initialHardSkills = ['Figma', 'UI Design', 'Wireframing', 'Prototipação', 'React.js', 'JavaScript (ES6+)', 'HTML & CSS'];
 const initialSoftSkills = ['UX Research', 'Empatia', 'Comunicação', 'Resolução de Problemas', 'Trabalho em Equipe'];
-const initialLanguages = ['Inglês - Avançado', 'Espanhol - Básico'];
+const initialLanguages = [
+  { id: 1, name: 'Inglês - Avançado', link: '' },
+  { id: 2, name: 'Espanhol - Básico', link: '' }
+];
 
 const initialProjects = [
   { id: 1, title: 'Redesign App Financeiro', desc: 'Pesquisa com usuários, wireframes e protótipo de alta fidelidade para melhorar a conversão e usabilidade de um app de finanças.', tags: 'UX Research, Figma, UI Design', github: '' },
@@ -43,12 +49,128 @@ const initialCertificates = [
 ];
 
 function Portfolio({ profile, about, hardSkills, softSkills, languages, projects, experiences, educations, certificates }) {
-  const handlePrint = () => {
-    window.print();
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+
+  const handleGeneratePdf = async () => {
+    if (isGeneratingPdf) {
+      return;
+    }
+
+    const portfolioContent = document.querySelector('.portfolio-container');
+    if (!portfolioContent) {
+      alert('Nao foi possivel localizar o conteudo do portfolio para gerar o PDF.');
+      return;
+    }
+
+    try {
+      setIsGeneratingPdf(true);
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+
+      const safeName = profile.name
+        ? profile.name.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+        : 'camilla-pinto';
+
+      const canvas = await html2canvas(portfolioContent, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#FFFFFF',
+        scrollX: 0,
+        scrollY: -window.scrollY,
+        onclone: (clonedDoc) => {
+          const clonedWrapper = clonedDoc.querySelector('.portfolio-wrapper');
+          if (clonedWrapper) clonedWrapper.classList.add('pdf-exporting');
+
+          clonedDoc.querySelectorAll('.content-section').forEach((section) => {
+            section.style.opacity = '1';
+            section.style.animation = 'none';
+          });
+        }
+      });
+
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+      const margin = 8;
+      const pageWidthMm = pdf.internal.pageSize.getWidth() - margin * 2;
+      const pageHeightMm = pdf.internal.pageSize.getHeight() - margin * 2;
+      const pageHeightPx = Math.floor((pageHeightMm * canvas.width) / pageWidthMm);
+
+      const sectionSelectors = ['.hero-section', '#about', '#projects', '#experience', '#certificates'];
+      const sourceHeightPx = portfolioContent.scrollHeight || 1;
+      const scaleY = canvas.height / sourceHeightPx;
+      const breakpointsPx = sectionSelectors
+        .map((selector) => portfolioContent.querySelector(selector))
+        .filter(Boolean)
+        .map((el) => Math.floor(el.offsetTop * scaleY))
+        .filter((value) => value > 0)
+        .sort((a, b) => a - b);
+
+      let renderedHeightPx = 0;
+      let pageIndex = 0;
+
+      while (renderedHeightPx < canvas.height) {
+        const idealEndPx = renderedHeightPx + pageHeightPx;
+        let targetEndPx = Math.min(idealEndPx, canvas.height);
+
+        if (idealEndPx < canvas.height) {
+          const minCutPx = renderedHeightPx + Math.floor(pageHeightPx * 0.65);
+          const maxCutPx = Math.min(canvas.height, renderedHeightPx + Math.floor(pageHeightPx * 1.08));
+          const candidateCuts = breakpointsPx.filter((bp) => bp > minCutPx && bp < maxCutPx);
+          if (candidateCuts.length > 0) {
+            targetEndPx = candidateCuts.reduce((best, current) =>
+              Math.abs(current - idealEndPx) < Math.abs(best - idealEndPx) ? current : best
+            , candidateCuts[0]);
+          }
+        }
+
+        const minTailPx = Math.floor(pageHeightPx * 0.2);
+        if (canvas.height - targetEndPx < minTailPx) {
+          targetEndPx = canvas.height;
+        }
+
+        const sliceHeightPx = Math.max(1, targetEndPx - renderedHeightPx);
+        const pageCanvas = document.createElement('canvas');
+        pageCanvas.width = canvas.width;
+        pageCanvas.height = sliceHeightPx;
+
+        const pageContext = pageCanvas.getContext('2d');
+        if (!pageContext) break;
+
+        pageContext.drawImage(
+          canvas,
+          0,
+          renderedHeightPx,
+          canvas.width,
+          sliceHeightPx,
+          0,
+          0,
+          canvas.width,
+          sliceHeightPx
+        );
+
+        const pageImageData = pageCanvas.toDataURL('image/jpeg', 0.98);
+        const sliceHeightMm = (sliceHeightPx * pageWidthMm) / canvas.width;
+
+        if (pageIndex > 0) {
+          pdf.addPage();
+        }
+
+        pdf.addImage(pageImageData, 'JPEG', margin, margin, pageWidthMm, sliceHeightMm, undefined, 'FAST');
+
+        renderedHeightPx += sliceHeightPx;
+        pageIndex += 1;
+      }
+
+      pdf.save(`${safeName}-curriculo.pdf`);
+    } catch (error) {
+      console.error('Erro ao gerar PDF:', error);
+      alert('Nao foi possivel gerar o PDF agora. Tente novamente.');
+    } finally {
+      setIsGeneratingPdf(false);
+    }
   };
 
   return (
-    <div className="portfolio-wrapper">
+    <div className={`portfolio-wrapper ${isGeneratingPdf ? 'pdf-exporting' : ''}`}>
       {/* NavBar */}
       <nav className="navbar no-print">
         <div className="nav-logo">
@@ -61,11 +183,8 @@ function Portfolio({ profile, about, hardSkills, softSkills, languages, projects
           <a href="#certificates">Cursos e Títulos</a>
         </div>
         <div className="nav-actions">
-          <Link to="/admin" className="btn btn-secondary">
-            ⚙️ Painel Admin
-          </Link>
-          <button className="btn" onClick={handlePrint}>
-            🖨️ PDF
+          <button className="btn" onClick={handleGeneratePdf} disabled={isGeneratingPdf}>
+            {isGeneratingPdf ? 'Gerando PDF...' : '🖨️ PDF'}
           </button>
         </div>
       </nav>
@@ -80,10 +199,22 @@ function Portfolio({ profile, about, hardSkills, softSkills, languages, projects
             <h2 className="hero-subtitle">{profile.role}</h2>
             <p className="hero-description">{profile.description}</p>
             <div className="hero-contact">
-              <a href="https://wa.me/5521981235592" target="_blank" rel="noreferrer" className="contact-pill" style={{ textDecoration: 'none' }}>📱 WhatsApp</a>
-              <a href={`mailto:${profile.email}`} className="contact-pill" style={{ textDecoration: 'none' }}>📧 {profile.email}</a>
-              <a href={profile.linkedin.startsWith('http') ? profile.linkedin : `https://${profile.linkedin}`} target="_blank" rel="noreferrer" className="contact-pill" style={{ textDecoration: 'none' }}>💼 LinkedIn</a>
-              <span className="contact-pill">📍 Garça</span>
+              {isGeneratingPdf ? (
+                <span className="contact-pill">📱 WhatsApp</span>
+              ) : (
+                <a href="https://wa.me/5521981235592" target="_blank" rel="noreferrer" className="contact-pill" style={{ textDecoration: 'none' }}>📱 WhatsApp</a>
+              )}
+              {isGeneratingPdf ? (
+                <span className="contact-pill">📧 {profile.email}</span>
+              ) : (
+                <a href={`mailto:${profile.email}`} className="contact-pill" style={{ textDecoration: 'none' }}>📧 {profile.email}</a>
+              )}
+              {isGeneratingPdf ? (
+                <span className="contact-pill">💼 LinkedIn</span>
+              ) : (
+                <a href={profile.linkedin.startsWith('http') ? profile.linkedin : `https://${profile.linkedin}`} target="_blank" rel="noreferrer" className="contact-pill" style={{ textDecoration: 'none' }}>💼 LinkedIn</a>
+              )}
+              <span className="contact-pill">📍 {profile.location}</span>
             </div>
           </div>
           <div className="hero-image-container">
@@ -99,9 +230,24 @@ function Portfolio({ profile, about, hardSkills, softSkills, languages, projects
 
             <h3 className="section-title" style={{ fontSize: '2rem' }}>Idiomas</h3>
             <div className="skills-grid">
-              {languages.map((lang, index) => (
-                <span key={index} className="skill-pill" style={{ background: 'var(--color-primary)', color: 'white', borderColor: 'transparent' }}>{lang.trim()}</span>
-              ))}
+              {languages.map((lang, index) => {
+                const langName = typeof lang === 'string' ? lang : lang.name;
+                const langLink = typeof lang === 'string' ? '' : lang.link;
+                if (!langName) return null;
+
+                if (!isGeneratingPdf && langLink && langLink.trim() !== '' && langLink.trim() !== '#') {
+                  return (
+                    <a href={langLink} target="_blank" rel="noreferrer" key={lang.id || index} className="skill-pill" style={{ background: 'var(--color-primary)', color: 'white', borderColor: 'transparent', textDecoration: 'none', cursor: 'pointer', transition: 'transform 0.2s', display: 'inline-block' }} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
+                      {langName.trim()}
+                    </a>
+                  );
+                }
+                return (
+                  <span key={lang.id || index} className="skill-pill" style={{ background: 'var(--color-primary)', color: 'white', borderColor: 'transparent' }}>
+                    {langName.trim()}
+                  </span>
+                );
+              })}
             </div>
           </div>
           <div className="skills-block">
@@ -139,7 +285,7 @@ function Portfolio({ profile, about, hardSkills, softSkills, languages, projects
                       )}
                     </div>
                     {proj.github && (
-                      <a href={proj.github} target="_blank" rel="noreferrer" style={{ color: 'var(--color-primary)', display: 'flex', alignItems: 'center', transition: 'transform 0.2s', padding: '5px' }} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.15)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'} title="Ver repositório no Github">
+                      <a href={proj.github} target="_blank" rel="noreferrer" className="no-print" style={{ color: 'var(--color-primary)', display: 'flex', alignItems: 'center', transition: 'transform 0.2s', padding: '5px' }} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.15)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'} title="Ver repositório no Github">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                           <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.45-1.15-1.1-1.46-1.1-1.46-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 10 0 0 12 2Z" />
                         </svg>
@@ -187,19 +333,18 @@ function Portfolio({ profile, about, hardSkills, softSkills, languages, projects
           </div>
         </section>
 
-        {/* Cursos e Títulos - Print Hidden */}
-        <section id="certificates" className="content-section no-print">
+        {/* Cursos e Títulos */}
+        <section id="certificates" className="content-section">
           <h3 className="section-title">Cursos e Títulos</h3>
-          <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '20px' }}>
-            Os cursos são exibidos apenas na versão web do portfólio.
-          </p>
           <div className="certificates-grid">
             {certificates.map((cert) => (
               <div key={cert.id} className="certificate-card">
                 <div className="cert-title">{cert.title}</div>
                 <div className="cert-issuer">{cert.issuer}</div>
                 {(cert.link && cert.link.trim() !== '' && cert.link.trim() !== '#') && (
-                  <a href={cert.link} target="_blank" rel="noreferrer" className="cert-link">Visualizar Certificado</a>
+                  !isGeneratingPdf && (
+                    <a href={cert.link} target="_blank" rel="noreferrer" className="cert-link">Visualizar Certificado</a>
+                  )
                 )}
               </div>
             ))}
@@ -240,8 +385,13 @@ function AdminPanel({
     setSoftSkills(e.target.value.split(','));
   };
 
-  const handleLanguagesChange = (e) => {
-    setLanguages(e.target.value.split(','));
+  const addLanguage = () => {
+    const newLang = { id: Date.now(), name: '', link: '' };
+    setLanguages([...languages, newLang]);
+  };
+
+  const removeLanguage = (id) => {
+    setLanguages(languages.filter(lang => lang.id !== id));
   };
 
   const addCertificate = () => {
@@ -302,6 +452,7 @@ function AdminPanel({
         <h1 style={{ color: 'var(--color-primary)', margin: 0 }}>⚙️ Painel de Administração</h1>
         <div style={{ display: 'flex', gap: '15px' }}>
           <button className="btn" onClick={saveToFirebase} style={{ background: 'linear-gradient(135deg, var(--color-accent1) 0%, #D88E99 100%)', boxShadow: '0 6px 15px rgba(183, 110, 121, 0.3)' }}>💾 Salvar Nuvem</button>
+          <button className="btn btn-secondary" onClick={() => { signOut(auth); navigate('/'); }}>Sair</button>
           <button className="btn btn-secondary" onClick={() => navigate('/')}>Voltar</button>
         </div>
       </div>
@@ -350,10 +501,20 @@ function AdminPanel({
           <label>Soft Skills (separadas por vírgula)</label>
           <input type="text" value={softSkills.join(',')} onChange={handleSoftSkillsChange} />
         </div>
-        <div className="form-group">
-          <label>Idiomas (separados por vírgula)</label>
-          <input type="text" value={languages.join(',')} onChange={handleLanguagesChange} />
+      </div>
+
+      <div className="admin-card">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+          <h3>2.5 Idiomas e Certificados</h3>
+          <button className="btn btn-secondary" onClick={addLanguage} style={{ padding: '5px 10px', fontSize: '0.9rem' }}>+ Novo</button>
         </div>
+        {languages.map((lang) => (
+          <div key={lang.id} style={{ display: 'flex', gap: '10px', alignItems: 'center', marginBottom: '10px' }}>
+            <input type="text" placeholder="Idioma / Nível" style={{ flex: 1.5, padding: '10px', borderRadius: '8px', border: '1px solid #ccc', fontFamily: 'inherit', fontSize: '1rem' }} value={lang.name} onChange={e => handleArrayChange(setLanguages, languages, lang.id, 'name', e.target.value)} />
+            <input type="url" placeholder="Link do Certificado (Opcional)" style={{ flex: 2, padding: '10px', borderRadius: '8px', border: '1px solid #ccc', fontFamily: 'inherit', fontSize: '1rem' }} value={lang.link || ''} onChange={e => handleArrayChange(setLanguages, languages, lang.id, 'link', e.target.value)} />
+            <button onClick={() => removeLanguage(lang.id)} className="btn" style={{ padding: '8px 15px', background: 'red', color: 'white', borderRadius: '8px', boxShadow: 'none' }}>X</button>
+          </div>
+        ))}
       </div>
 
       <div className="admin-card">
@@ -455,7 +616,45 @@ const textAreaStyle = {
   resize: 'vertical'
 };
 
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      setError('Credenciais incorretas.');
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: 'var(--glass-bg)' }}>
+      <form onSubmit={handleLogin} style={{ background: 'white', padding: '40px', borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', width: '100%', maxWidth: '400px' }}>
+        <h2 style={{ textAlign: 'center', color: 'var(--color-primary)', marginBottom: '30px' }}>🔐 Área Restrita</h2>
+        {error && <p style={{ color: 'red', textAlign: 'center', marginBottom: '15px' }}>{error}</p>}
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ display: 'block', marginBottom: '10px', color: 'var(--color-primary)', fontWeight: 'bold' }}>E-mail</label>
+          <input type="email" value={email} onChange={e => setEmail(e.target.value)} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '1rem' }} required />
+        </div>
+        <div style={{ marginBottom: '30px' }}>
+          <label style={{ display: 'block', marginBottom: '10px', color: 'var(--color-primary)', fontWeight: 'bold' }}>Senha</label>
+          <input type="password" value={password} onChange={e => setPassword(e.target.value)} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '1rem' }} required />
+        </div>
+        <button type="submit" className="btn" style={{ width: '100%', marginBottom: '15px' }}>Entrar no Painel</button>
+        <div style={{ textAlign: 'center' }}>
+          <button type="button" onClick={() => navigate('/')} style={{ background: 'none', border: 'none', color: 'var(--color-accent1)', cursor: 'pointer', textDecoration: 'underline' }}>Voltar ao Portfólio</button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 function App() {
+  const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(initialProfile);
   const [about, setAbout] = useState(initialAbout);
   const [hardSkills, setHardSkills] = useState(initialHardSkills);
@@ -468,6 +667,10 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
     const fetchData = async () => {
       try {
         if (!db) {
@@ -482,7 +685,10 @@ function App() {
           if (data.about) setAbout(data.about);
           if (data.hardSkills) setHardSkills(data.hardSkills);
           if (data.softSkills) setSoftSkills(data.softSkills);
-          if (data.languages) setLanguages(data.languages);
+          if (data.languages) {
+            const formattedLanguages = data.languages.map((l, i) => typeof l === 'string' ? { id: Date.now() + i, name: l, link: '' } : l);
+            setLanguages(formattedLanguages);
+          }
           if (data.skills && !data.hardSkills) setHardSkills(data.skills); // Fallback data
           if (data.projects) setProjects(data.projects);
           if (data.experiences) setExperiences(data.experiences);
@@ -494,7 +700,10 @@ function App() {
       }
       setLoading(false);
     };
+
     fetchData();
+
+    return () => unsubscribe();
   }, []);
 
   if (loading) {
@@ -512,17 +721,19 @@ function App() {
           />
         } />
         <Route path="/admin" element={
-          <AdminPanel
-            profile={profile} setProfile={setProfile}
-            about={about} setAbout={setAbout}
-            hardSkills={hardSkills} setHardSkills={setHardSkills}
-            softSkills={softSkills} setSoftSkills={setSoftSkills}
-            languages={languages} setLanguages={setLanguages}
-            projects={projects} setProjects={setProjects}
-            experiences={experiences} setExperiences={setExperiences}
-            educations={educations} setEducations={setEducations}
-            certificates={certificates} setCertificates={setCertificates}
-          />
+          user ? (
+            <AdminPanel
+              profile={profile} setProfile={setProfile}
+              about={about} setAbout={setAbout}
+              hardSkills={hardSkills} setHardSkills={setHardSkills}
+              softSkills={softSkills} setSoftSkills={setSoftSkills}
+              languages={languages} setLanguages={setLanguages}
+              projects={projects} setProjects={setProjects}
+              experiences={experiences} setExperiences={setExperiences}
+              educations={educations} setEducations={setEducations}
+              certificates={certificates} setCertificates={setCertificates}
+            />
+          ) : <Login />
         } />
       </Routes>
     </BrowserRouter>
