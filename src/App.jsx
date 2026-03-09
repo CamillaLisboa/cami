@@ -50,6 +50,7 @@ const initialCertificates = [
 
 function Portfolio({ profile, about, hardSkills, softSkills, languages, projects, experiences, educations, certificates }) {
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleGeneratePdf = async () => {
     if (isGeneratingPdf) {
@@ -176,13 +177,31 @@ function Portfolio({ profile, about, hardSkills, softSkills, languages, projects
         <div className="nav-logo">
           <img src={logoImg} alt="Logo" className="nav-logo-img" />
         </div>
-        <div className="nav-links">
-          <a href="#about">Sobre Mim</a>
-          <a href="#projects">Projetos</a>
-          <a href="#experience">Trajetória</a>
-          <a href="#certificates">Cursos e Títulos</a>
+        <button
+          type="button"
+          className="nav-toggle"
+          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+          aria-expanded={isMobileMenuOpen}
+          aria-label="Abrir ou fechar menu de navegação"
+        >
+          <span>Menu</span>
+          <span className={`nav-toggle-arrow ${isMobileMenuOpen ? 'open' : ''}`}>▾</span>
+        </button>
+        <div className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
+          <a href="#about" onClick={() => setIsMobileMenuOpen(false)}>Sobre Mim</a>
+          <a href="#projects" onClick={() => setIsMobileMenuOpen(false)}>Projetos</a>
+          <a href="#experience" onClick={() => setIsMobileMenuOpen(false)}>Trajetória</a>
+          <a href="#certificates" onClick={() => setIsMobileMenuOpen(false)}>Cursos e Títulos</a>
+          <button
+            type="button"
+            className="nav-link-pdf-btn"
+            onClick={handleGeneratePdf}
+            disabled={isGeneratingPdf}
+          >
+            {isGeneratingPdf ? 'Gerando PDF...' : '🖨️ Baixar PDF'}
+          </button>
         </div>
-        <div className="nav-actions">
+        <div className={`nav-actions ${isMobileMenuOpen ? 'open' : ''}`}>
           <button className="btn" onClick={handleGeneratePdf} disabled={isGeneratingPdf}>
             {isGeneratingPdf ? 'Gerando PDF...' : '🖨️ PDF'}
           </button>
