@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import { db, auth } from './firebase';
 import './index.css';
 import logoImg from './assets/logo.PNG';
@@ -47,127 +45,29 @@ const initialCertificates = [
   { id: 1, title: 'UX Design Fundamentals', issuer: 'Google', link: '#' },
   { id: 2, title: 'React.js & Front-end Completo', issuer: 'Rocketseat', link: '#' }
 ];
+const FIXED_PDF_PATH = '/Camilla%20Pinto%20-%20UX.pdf';
 
 function Portfolio({ profile, about, hardSkills, softSkills, languages, projects, experiences, educations, certificates }) {
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleGeneratePdf = async () => {
+  const handleGeneratePdf = () => {
     if (isGeneratingPdf) {
       return;
     }
 
-    const portfolioContent = document.querySelector('.portfolio-container');
-    if (!portfolioContent) {
-      alert('Nao foi possivel localizar o conteudo do portfolio para gerar o PDF.');
-      return;
-    }
+    setIsGeneratingPdf(true);
+    setIsMobileMenuOpen(false);
 
-    try {
-      setIsGeneratingPdf(true);
-      await new Promise((resolve) => requestAnimationFrame(resolve));
-      await new Promise((resolve) => requestAnimationFrame(resolve));
+    const anchor = document.createElement('a');
+    anchor.href = FIXED_PDF_PATH;
+    anchor.download = 'Camilla Pinto - UX.pdf';
+    anchor.rel = 'noopener';
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
 
-      const safeName = profile.name
-        ? profile.name.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-        : 'camilla-pinto';
-
-      const canvas = await html2canvas(portfolioContent, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: '#FFFFFF',
-        scrollX: 0,
-        scrollY: -window.scrollY,
-        onclone: (clonedDoc) => {
-          const clonedWrapper = clonedDoc.querySelector('.portfolio-wrapper');
-          if (clonedWrapper) clonedWrapper.classList.add('pdf-exporting');
-
-          clonedDoc.querySelectorAll('.content-section').forEach((section) => {
-            section.style.opacity = '1';
-            section.style.animation = 'none';
-          });
-        }
-      });
-
-      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-      const margin = 8;
-      const pageWidthMm = pdf.internal.pageSize.getWidth() - margin * 2;
-      const pageHeightMm = pdf.internal.pageSize.getHeight() - margin * 2;
-      const pageHeightPx = Math.floor((pageHeightMm * canvas.width) / pageWidthMm);
-
-      const sectionSelectors = ['.hero-section', '#about', '#projects', '#experience', '#certificates'];
-      const sourceHeightPx = portfolioContent.scrollHeight || 1;
-      const scaleY = canvas.height / sourceHeightPx;
-      const breakpointsPx = sectionSelectors
-        .map((selector) => portfolioContent.querySelector(selector))
-        .filter(Boolean)
-        .map((el) => Math.floor(el.offsetTop * scaleY))
-        .filter((value) => value > 0)
-        .sort((a, b) => a - b);
-
-      let renderedHeightPx = 0;
-      let pageIndex = 0;
-
-      while (renderedHeightPx < canvas.height) {
-        const idealEndPx = renderedHeightPx + pageHeightPx;
-        let targetEndPx = Math.min(idealEndPx, canvas.height);
-
-        if (idealEndPx < canvas.height) {
-          const minCutPx = renderedHeightPx + Math.floor(pageHeightPx * 0.65);
-          const maxCutPx = Math.min(canvas.height, renderedHeightPx + Math.floor(pageHeightPx * 1.08));
-          const candidateCuts = breakpointsPx.filter((bp) => bp > minCutPx && bp < maxCutPx);
-          if (candidateCuts.length > 0) {
-            targetEndPx = candidateCuts.reduce((best, current) =>
-              Math.abs(current - idealEndPx) < Math.abs(best - idealEndPx) ? current : best
-            , candidateCuts[0]);
-          }
-        }
-
-        const minTailPx = Math.floor(pageHeightPx * 0.2);
-        if (canvas.height - targetEndPx < minTailPx) {
-          targetEndPx = canvas.height;
-        }
-
-        const sliceHeightPx = Math.max(1, targetEndPx - renderedHeightPx);
-        const pageCanvas = document.createElement('canvas');
-        pageCanvas.width = canvas.width;
-        pageCanvas.height = sliceHeightPx;
-
-        const pageContext = pageCanvas.getContext('2d');
-        if (!pageContext) break;
-
-        pageContext.drawImage(
-          canvas,
-          0,
-          renderedHeightPx,
-          canvas.width,
-          sliceHeightPx,
-          0,
-          0,
-          canvas.width,
-          sliceHeightPx
-        );
-
-        const pageImageData = pageCanvas.toDataURL('image/jpeg', 0.98);
-        const sliceHeightMm = (sliceHeightPx * pageWidthMm) / canvas.width;
-
-        if (pageIndex > 0) {
-          pdf.addPage();
-        }
-
-        pdf.addImage(pageImageData, 'JPEG', margin, margin, pageWidthMm, sliceHeightMm, undefined, 'FAST');
-
-        renderedHeightPx += sliceHeightPx;
-        pageIndex += 1;
-      }
-
-      pdf.save(`${safeName}-curriculo.pdf`);
-    } catch (error) {
-      console.error('Erro ao gerar PDF:', error);
-      alert('Nao foi possivel gerar o PDF agora. Tente novamente.');
-    } finally {
-      setIsGeneratingPdf(false);
-    }
+    setTimeout(() => setIsGeneratingPdf(false), 350);
   };
 
   return (

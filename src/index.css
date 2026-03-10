@@ -208,6 +208,23 @@ a {
   display: none;
 }
 
+.pdf-export-host {
+  position: fixed;
+  left: -20000px;
+  top: 0;
+  width: 1280px;
+  pointer-events: none;
+  z-index: -1;
+  background: #fff;
+}
+
+.pdf-export-host .pdf-desktop-capture {
+  width: 1000px !important;
+  max-width: 1000px !important;
+  padding: 40px 40px !important;
+  margin: 0 auto !important;
+}
+
 /* Buttons - Premium Feel */
 .btn {
   background: linear-gradient(135deg, var(--color-primary) 0%, #2A386B 100%);
@@ -991,8 +1008,12 @@ a {
 @media (max-width: 900px) {
   .portfolio-wrapper {
     padding-left: 0px;
-    padding-bottom: 160px;
+    padding-bottom: 120px;
     /* Space for bottom floating nav */
+  }
+
+  .portfolio-container {
+    padding: 18px 16px;
   }
 
   .navbar {
@@ -1100,16 +1121,21 @@ a {
   .hero-section {
     flex-direction: column-reverse;
     text-align: center;
-    padding-top: 60px;
+    padding-top: 28px;
     min-height: auto;
+    gap: 22px;
   }
 
   .hero-title {
-    font-size: 3.5rem;
+    font-size: 2.6rem;
+    line-height: 1.1;
+    margin-bottom: 14px;
   }
 
   .hero-subtitle {
     justify-content: center;
+    font-size: 1.28rem;
+    margin-bottom: 14px;
   }
 
   .hero-subtitle::before {
@@ -1118,10 +1144,132 @@ a {
 
   .hero-contact {
     justify-content: center;
+    gap: 8px;
   }
 
   .hero-description {
-    margin: 0 auto 40px auto;
+    margin: 0 auto 18px auto;
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .hero-image {
+    width: 250px;
+    height: 250px;
+  }
+
+  .contact-pill {
+    padding: 8px 14px;
+    font-size: 0.86rem;
+  }
+
+  .content-section {
+    padding: 46px 0;
+  }
+
+  .section-title {
+    font-size: 2.1rem;
+    margin-bottom: 22px;
+  }
+
+  .section-title.center {
+    margin-bottom: 34px;
+  }
+
+  .split-section {
+    gap: 34px;
+  }
+
+  .about-text,
+  .project-card-body p,
+  .tl-content p {
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .skills-grid {
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .skill-pill {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+
+  .projects-grid,
+  .certificates-grid {
+    gap: 18px;
+  }
+
+  .project-card-header {
+    height: 170px;
+    padding: 18px;
+  }
+
+  .project-card-header h4 {
+    font-size: 1.2rem;
+    padding: 10px 14px;
+  }
+
+  .project-card-body {
+    padding: 18px;
+  }
+
+  .project-tags {
+    gap: 8px;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+  }
+
+  .timeline {
+    margin-top: 16px;
+    padding-left: 28px;
+  }
+
+  .timeline-item {
+    margin-bottom: 22px;
+    padding: 18px 18px 16px 22px;
+    border-radius: 16px;
+  }
+
+  .tl-content h4 {
+    font-size: 1.14rem;
+    margin-bottom: 4px;
+  }
+
+  .tl-content h5 {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    padding: 4px 10px;
+  }
+
+  .certificates-grid {
+    margin-top: 12px;
+  }
+
+  .certificate-card {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .cert-title {
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+
+  .cert-issuer {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    padding: 4px 10px;
+  }
+
+  .cert-link {
+    padding: 8px 12px;
+    font-size: 0.88rem;
   }
 }
 
