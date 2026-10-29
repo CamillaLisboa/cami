@@ -1,20 +1,52 @@
+# Camilla Pinto — criação de sites profissionais, landing pages, portfólio online e consultoria SEO
+# Buscadores e assistentes de IA podem ler todo o site.
+
 User-agent: *
 Allow: /
 
-# Buscadores e assistentes de IA são bem-vindos
+# Google, Bing e Apple
+User-agent: Googlebot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# OpenAI (ChatGPT)
 User-agent: GPTBot
 Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 User-agent: ChatGPT-User
 Allow: /
+
+# Anthropic (Claude)
 User-agent: ClaudeBot
 Allow: /
 User-agent: Claude-SearchBot
 Allow: /
+User-agent: Claude-User
+Allow: /
+
+# Perplexity
 User-agent: PerplexityBot
 Allow: /
-User-agent: Google-Extended
+User-agent: Perplexity-User
+Allow: /
+
+# Outros assistentes
+User-agent: DuckAssistBot
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: meta-externalagent
+Allow: /
+User-agent: MistralAI-User
 Allow: /
 
 Sitemap: https://meuportifolio-ab78e.web.app/sitemap.xml
+# Resumo para IAs: https://meuportifolio-ab78e.web.app/llms.txt

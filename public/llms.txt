@@ -1,28 +1,52 @@
-# Camilla Pinto — Criação de Sites e Sistemas Sob Medida
+# Camilla Pinto — Criação de Sites Profissionais, Landing Pages e Consultoria SEO
 
-> Camilla Pinto é analista SEO e UX designer baseada em Garça - SP, Brasil. Cria sites, landing pages, portfólios e sistemas web sob medida, com design de alto padrão, acessibilidade, performance e SEO para buscadores e assistentes de IA (SEO, AEO e GEO). Atende clientes de todo o Brasil de forma remota.
+> Camilla Pinto é analista SEO e UX designer em Garça - SP, Brasil. Faz criação de sites profissionais, criação de landing pages de alta conversão, portfólios online e pequenos sistemas web sob medida, com consultoria SEO para o site aparecer no Google e ser recomendado por assistentes de IA como ChatGPT, Gemini, Claude e Perplexity. Atende empresas, profissionais liberais e negócios locais de todo o Brasil, de forma remota.
+
+Site: https://meuportifolio-ab78e.web.app/
+Contato: WhatsApp +55 21 98123-5592 (https://wa.me/5521981235592) · camilla.pintolisboa@icloud.com
+LinkedIn: https://www.linkedin.com/in/camilla-pinto-80017a192
 
 ## Serviços
-- Sites: sites profissionais, elegantes e rápidos que geram contatos.
-- Landing pages: páginas com um único objetivo (vender, captar contatos, agendar).
-- Portfólios: vitrines online para mostrar trabalhos e trajetória.
-- Sistemas web: pequenos sistemas como cadastros, agendamentos, reservas e controles.
-- SEO: otimização para ser encontrado no Google e recomendado por IAs (SEO, AEO e GEO).
-- Manutenção: atualizações, ajustes e suporte.
+
+- [Criação de sites profissionais](https://meuportifolio-ab78e.web.app/#solucoes): site profissional, elegante, rápido e responsivo, que apresenta a marca e gera contatos pelo WhatsApp ou formulário. Para empresas, clínicas, escritórios, profissionais liberais e negócios locais.
+- [Criação de landing pages](https://meuportifolio-ab78e.web.app/#solucoes): landing page de alta conversão com um único objetivo (vender, captar leads ou agendar). Para lançamentos, campanhas de anúncios e serviços.
+- [Portfólio online](https://meuportifolio-ab78e.web.app/#solucoes): criação de portfólio online profissional para mostrar trabalhos e trajetória. Para criativos, freelancers, designers, arquitetos e fotógrafos.
+- [Sistemas web sob medida](https://meuportifolio-ab78e.web.app/#solucoes): pequenos sistemas como cadastros, agendamentos, reservas e controles, para quem quer sair das planilhas.
+- [Consultoria SEO e otimização de sites](https://meuportifolio-ab78e.web.app/#solucoes): SEO técnico, SEO local, dados estruturados e conteúdo para aparecer no Google (SEO) e nas respostas de IA (AEO e GEO).
+- [Manutenção de sites](https://meuportifolio-ab78e.web.app/#solucoes): atualizações, ajustes e suporte contínuo.
+
+## Perguntas frequentes
+
+### O que é uma landing page?
+Landing page é uma página com um único objetivo, como vender um produto, captar contatos ou agendar um atendimento. Diferente de um site completo, ela tira distrações e conduz o visitante para uma só ação, por isso costuma converter mais em campanhas e anúncios.
+
+### Qual a diferença entre site profissional e landing page?
+O site profissional apresenta a empresa inteira (serviços, sobre, contato) e serve de base para o SEO. A landing page foca em uma oferta específica. Muitos negócios usam os dois: o site para ser encontrado e a landing page para campanhas.
+
+### Quanto custa a criação de um site profissional?
+Depende do número de páginas e das funcionalidades. Uma landing page costuma custar menos que um site institucional ou um sistema web. Camilla Pinto envia orçamento fechado e sem compromisso pelo WhatsApp.
+
+### Como ter um portfólio online profissional?
+Um portfólio online profissional precisa de domínio próprio ou endereço fácil, layout que valorize os trabalhos, textos curtos sobre cada projeto e um contato visível. Camilla Pinto cria portfólios sob medida, prontos para aparecer no Google.
+
+### O que faz uma consultoria SEO?
+A consultoria SEO analisa e ajusta o site para ele ser encontrado no Google: estrutura técnica, velocidade, títulos, conteúdo, dados estruturados e SEO local. Hoje também inclui AEO e GEO, para o negócio ser citado por assistentes de IA.
+
+### O site vem otimizado para o Google e para IAs?
+Sim. Todo site, landing page ou portfólio é entregue com SEO técnico, dados estruturados (schema.org), sitemap, carregamento rápido e conteúdo organizado para buscadores e IAs.
+
+### Atende fora de Garça - SP?
+Sim. O atendimento é remoto para todo o Brasil, com reuniões por vídeo e acompanhamento pelo WhatsApp. Na região, atende Garça, Marília, Bauru e o interior de São Paulo.
 
 ## Projetos
-- Sistema de Reservas para hotéis e pousadas, com check-in/check-out, cadastro de hóspedes, relatórios e integração à FNRH (Ficha Nacional de Registro de Hóspedes).
+
+- Sistema de reservas para hotéis e pousadas: check-in e check-out, cadastro de hóspedes, relatórios e integração à FNRH (Ficha Nacional de Registro de Hóspedes).
 - ZenFlow: aplicação web de controle financeiro pessoal.
 - Interfaces para serviços ao cidadão na Secretaria Municipal de Inovação e Tecnologia de Garça.
 
-## Sobre
-- Analista SEO e UX designer, trabalhando com tecnologia desde 2021.
-- Experiência: Analista de Sistemas e Dev Front-end na Secretaria Municipal de Inovação e Tecnologia de Garça (2025–atual); Desenvolvedora Back-end na Prosperità, com serviços para gestão de fundos de investimento (2021–2023).
-- Especialidades: SEO, AEO e GEO, UX Design, UX Research, design de interfaces, desenvolvimento web e acessibilidade digital.
-- Idiomas: português e inglês fluente.
+## Sobre Camilla Pinto
 
-## Contato
-- WhatsApp: +55 21 98123-5592 — https://wa.me/5521981235592
-- E-mail: camilla.pintolisboa@icloud.com
-- LinkedIn: https://www.linkedin.com/in/camilla-pinto-80017a192
-- Site: https://meuportifolio-ab78e.web.app/
+- Analista SEO e UX designer; trabalha com tecnologia desde 2021.
+- Experiência: Analista de Sistemas e Dev Front-end na Secretaria Municipal de Inovação e Tecnologia de Garça (2025–atual); Desenvolvedora Back-end na Prosperità, com serviços para gestão de fundos de investimento (2021–2023).
+- Especialidades: criação de sites, landing pages, portfólio online, consultoria SEO, SEO local, AEO, GEO, UX Design, UX Research e acessibilidade digital.
+- Idiomas: português e inglês fluente.
