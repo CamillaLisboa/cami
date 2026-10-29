@@ -1,17 +1,528 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Camilla Pinto | UX Designer - Currículo</title>
-    <!-- Google Fonts for typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- SEO -->
+  <title>Criação de Sites e Sistemas Sob Medida | Camilla Pinto — Analista SEO & UX Designer</title>
+  <meta name="description" content="Camilla Pinto, analista SEO e UX designer, cria sites, landing pages, portfólios e sistemas web sob medida, com design elegante e SEO para Google e IAs. Atendimento em todo o Brasil. Peça seu orçamento." />
+  <meta name="author" content="Camilla Pinto" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="theme-color" content="#07080F" />
+  <link rel="canonical" href="https://camillapinto.com.br/" />
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="Resumo para IAs (llms.txt)" />
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Open Graph / redes -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Camilla Pinto" />
+  <meta property="og:title" content="Sites e sistemas sob medida que convertem | Camilla Pinto" />
+  <meta property="og:description" content="Sites, landing pages, portfólios e sistemas web com design de alto padrão e SEO para Google e IAs." />
+  <meta property="og:url" content="https://camillapinto.com.br/" />
+  <meta property="og:image" content="https://camillapinto.com.br/og-image.jpg" />
+  <meta property="og:image:alt" content="Retrato de Camilla Pinto, analista SEO e UX designer" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sites e sistemas sob medida que convertem | Camilla Pinto" />
+  <meta name="twitter:description" content="Sites, landing pages, portfólios e sistemas web com design de alto padrão e SEO para Google e IAs." />
+  <meta name="twitter:image" content="https://camillapinto.com.br/og-image.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="/camilla-pinto.jpg" />
+
+  <!-- Dados estruturados (SEO / AEO / GEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://camillapinto.com.br/#website",
+        "url": "https://camillapinto.com.br/",
+        "name": "Camilla Pinto — Sites e Sistemas Sob Medida",
+        "inLanguage": "pt-BR",
+        "publisher": { "@id": "https://camillapinto.com.br/#camilla" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://camillapinto.com.br/#camilla",
+        "name": "Camilla Pinto",
+        "jobTitle": "Analista SEO e UX Designer",
+        "description": "Analista SEO e UX Designer que cria sites, landing pages e pequenos sistemas web sob medida.",
+        "image": "https://camillapinto.com.br/camilla-pinto.jpg",
+        "url": "https://camillapinto.com.br/",
+        "email": "mailto:camilla.pintolisboa@icloud.com",
+        "telephone": "+55-21-98123-5592",
+        "address": { "@type": "PostalAddress", "addressLocality": "Garça", "addressRegion": "SP", "addressCountry": "BR" },
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "FATEC Garça" },
+          { "@type": "CollegeOrUniversity", "name": "Anhanguera" },
+          { "@type": "CollegeOrUniversity", "name": "UNIGRANRIO — Universidade do Grande Rio" }
+        ],
+        "knowsAbout": ["SEO", "AEO", "GEO", "UX Design", "Desenvolvimento Front-end", "UI Design", "Figma", "JavaScript", "React", "Python", "Django", "Google Cloud", "SEO técnico", "Acessibilidade digital", "Sistemas web"],
+        "knowsLanguage": ["pt-BR", "en", "ko"],
+        "award": ["Menção Honrosa no XV Congresso de Pesquisa Científica da UNIVEM", "Finalista nacional da OBI — Olimpíada Brasileira de Informática"],
+        "sameAs": ["https://www.linkedin.com/in/camilla-pinto-80017a192", "https://github.com/CamillaLisboa"]
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://camillapinto.com.br/#servico",
+        "name": "Camilla Pinto — Criação de Sites e Sistemas",
+        "url": "https://camillapinto.com.br/",
+        "image": "https://camillapinto.com.br/og-image.jpg",
+        "logo": "https://camillapinto.com.br/logo.png",
+        "description": "Criação de sites, landing pages, portfólios e sistemas web sob medida, com design elegante e SEO para buscadores e IAs.",
+        "founder": { "@id": "https://camillapinto.com.br/#camilla" },
+        "telephone": "+55-21-98123-5592",
+        "email": "camilla.pintolisboa@icloud.com",
+        "priceRange": "$$",
+        "address": { "@type": "PostalAddress", "addressLocality": "Garça", "addressRegion": "SP", "addressCountry": "BR" },
+        "areaServed": [{ "@type": "Country", "name": "Brasil" }, { "@type": "City", "name": "Garça" }, { "@type": "City", "name": "Marília" }],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Soluções digitais",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Criação de sites", "description": "Sites profissionais, elegantes e rápidos que apresentam a marca e geram contatos." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Criação de landing pages", "description": "Páginas com um único objetivo, pensadas para vender, captar contatos ou agendar." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Criação de portfólios", "description": "Portfólios online para mostrar trabalhos e trajetória profissional." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sistemas web", "description": "Pequenos sistemas como cadastros, agendamentos, reservas e controles." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO", "description": "Otimização para ser encontrado no Google e recomendado por assistentes de IA." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Manutenção de sites", "description": "Atualizações, ajustes e suporte contínuo." } }
+          ]
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://camillapinto.com.br/#faq",
+        "mainEntity": [
+          { "@type": "Question", "name": "Quanto custa criar um site profissional?", "acceptedAnswer": { "@type": "Answer", "text": "O valor depende do tamanho do projeto, do número de páginas e das funcionalidades. Uma landing page custa menos que um site institucional completo ou um sistema. Envie uma mensagem com o que você precisa e você recebe um orçamento fechado, sem compromisso." } },
+          { "@type": "Question", "name": "Quanto tempo leva para o site ficar pronto?", "acceptedAnswer": { "@type": "Answer", "text": "O prazo é definido no orçamento, conforme o escopo. Landing pages costumam ser as entregas mais rápidas; sites institucionais e sistemas levam mais tempo porque passam por pesquisa, protótipo e testes." } },
+          { "@type": "Question", "name": "Você atende clientes fora de Garça - SP?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. Camilla Pinto atende clientes de todo o Brasil de forma remota, com reuniões por vídeo e acompanhamento pelo WhatsApp." } },
+          { "@type": "Question", "name": "O site vem otimizado para aparecer no Google e no ChatGPT?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. Todo projeto é entregue com SEO técnico (títulos, descrições, dados estruturados, sitemap e performance) e com práticas de AEO e GEO, que ajudam o seu negócio a ser entendido e citado por buscadores e assistentes de IA como ChatGPT, Gemini e Perplexity." } },
+          { "@type": "Question", "name": "O que é um sistema web sob medida?", "acceptedAnswer": { "@type": "Answer", "text": "É um software que roda no navegador e é feito para o processo da sua empresa, como controle de reservas, agendamentos, cadastro de clientes ou gestão financeira, sem as limitações de uma planilha ou de um sistema genérico." } },
+          { "@type": "Question", "name": "Eu consigo atualizar o site depois?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. O projeto pode ser entregue com área de edição de conteúdo, e também há a opção de plano de manutenção para atualizações, melhorias e suporte contínuo." } }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Início", "item": "https://camillapinto.com.br/" }]
+      }
+    ]
+  }
+  </script>
+
+  <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual'</script>
+  <noscript><style>.gate{display:none!important}.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+
+<body class="is-locked">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ===== Portão biométrico ===== -->
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" aria-describedby="gate-status">
+    <div class="gate__curtain gate__curtain--top" aria-hidden="true"></div>
+    <div class="gate__curtain gate__curtain--bottom" aria-hidden="true"></div>
+    <div class="gate__grain" aria-hidden="true"></div>
+
+    <div class="gate__inner">
+      <p class="gate__brand"><img src="/logo.png" width="44" height="44" alt="" /><span>Camilla Pinto <b>·</b> Studio</span></p>
+
+      <button class="scanner" id="scanner" type="button" aria-describedby="gate-status">
+        <span class="visually-hidden">Inserir digital para desbloquear as soluções</span>
+        <svg class="scanner__ring" viewBox="0 0 220 220" aria-hidden="true">
+          <circle class="ring-track" cx="110" cy="110" r="104" />
+          <circle class="ring-progress" id="ring-progress" cx="110" cy="110" r="104" />
+        </svg>
+        <span class="scanner__pad" aria-hidden="true">
+          <svg class="fingerprint" id="fingerprint" viewBox="0 0 120 140"></svg>
+          <span class="scanner__beam"></span>
+          <svg class="scanner__check" viewBox="0 0 52 52"><path d="M14 27 l8 8 l16 -18" /></svg>
+        </span>
+        <svg class="finger" viewBox="0 0 120 300" aria-hidden="true">
+          <defs>
+            <linearGradient id="skin" x1="0" x2="1">
+              <stop offset="0" stop-color="#C99A86" />
+              <stop offset=".45" stop-color="#E9C3AE" />
+              <stop offset="1" stop-color="#B9846F" />
+            </linearGradient>
+            <linearGradient id="nail" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F6DDD3" />
+              <stop offset="1" stop-color="#E7B9AC" />
+            </linearGradient>
+          </defs>
+          <path d="M22 0 V232 C22 270 98 270 98 232 V0 Z" fill="url(#skin)" />
+          <path d="M36 196 C36 168 84 168 84 196 V236 C84 252 36 252 36 236 Z" fill="url(#nail)" opacity=".95" />
+          <path d="M40 120 C52 114 68 114 80 120" stroke="#A7735F" stroke-width="2" fill="none" opacity=".45" stroke-linecap="round" />
+          <path d="M44 130 C54 126 66 126 76 130" stroke="#A7735F" stroke-width="2" fill="none" opacity=".3" stroke-linecap="round" />
+        </svg>
+      </button>
+
+      <p class="gate__title" id="gate-title">Insira a sua digital<br /><em>para desbloquear soluções</em></p>
+      <p class="gate__status" id="gate-status" aria-live="polite">Toque no sensor para começar</p>
+      <button class="gate__skip" id="gate-skip" type="button">Entrar sem animação</button>
+    </div>
+  </div>
+
+  <!-- ===== Cabeçalho ===== -->
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#inicio" aria-label="Camilla Pinto — início">
+      <img class="nav__mark" src="/logo.png" width="40" height="40" alt="" />
+      <span class="nav__name">Camilla Pinto</span>
+    </a>
+    <nav class="nav__links" id="nav-links" aria-label="Navegação principal">
+      <a href="#solucoes">Soluções</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#processo">Processo</a>
+      <a href="#sobre">Sobre mim</a>
+      <a href="#faq">Dúvidas</a>
+      <a class="btn btn--small btn--gold" href="#contato">Pedir orçamento</a>
+    </nav>
+    <button class="nav__toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span class="visually-hidden">Abrir menu</span>
+    </button>
+  </header>
+
+  <main id="conteudo">
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__aura" aria-hidden="true"></div>
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow reveal"><span class="dot"></span> Agenda aberta para novos projetos</p>
+          <h1 class="hero__title reveal" id="hero-title" tabindex="-1">
+            Sites e sistemas <em>sob medida</em> que transformam visitas em clientes.
+          </h1>
+          <p class="hero__lead reveal">
+            Eu sou a <strong>Camilla Pinto</strong>, analista SEO e UX designer. Crio sites, landing pages, portfólios e sistemas web
+            com design de alto padrão, carregamento rápido e SEO pensado para o Google e para as IAs.
+          </p>
+          <div class="hero__ctas reveal">
+            <a class="btn btn--gold magnetic" href="https://wa.me/5521981235592?text=Ol%C3%A1%20Camilla!%20Quero%20um%20or%C3%A7amento%20para%20um%20projeto." target="_blank" rel="noopener" data-track="hero_whatsapp">
+              Quero meu orçamento
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+            <a class="btn btn--ghost" href="#solucoes">Ver soluções</a>
+          </div>
+          <ul class="hero__proof reveal" aria-label="Diferenciais">
+            <li><strong>UX + código</strong><span>design e desenvolvimento num só lugar</span></li>
+            <li><strong>SEO · AEO · GEO</strong><span>encontrável no Google e nas IAs</span></li>
+            <li><strong>Todo o Brasil</strong><span>atendimento remoto e próximo</span></li>
+          </ul>
+        </div>
+
+        <figure class="hero__portrait reveal">
+          <div class="portrait__frame">
+            <img src="/camilla-pinto.jpg" width="900" height="1206" alt="Camilla Pinto, analista SEO e UX designer, em retrato preto e branco" fetchpriority="high" />
+          </div>
+          <figcaption class="portrait__badge">
+            <span class="badge__ring" aria-hidden="true"></span>
+            <span><strong>Analista SEO</strong> &amp; UX Designer</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>Sites</span><i>✦</i><span>Landing pages</span><i>✦</i><span>Portfólios</span><i>✦</i><span>Sistemas web</span><i>✦</i><span>SEO</span><i>✦</i><span>UX Design</span><i>✦</i><span>Manutenção</span><i>✦</i>
+          <span>Sites</span><i>✦</i><span>Landing pages</span><i>✦</i><span>Portfólios</span><i>✦</i><span>Sistemas web</span><i>✦</i><span>SEO</span><i>✦</i><span>UX Design</span><i>✦</i><span>Manutenção</span><i>✦</i>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Soluções ===== -->
+    <section class="section" id="solucoes" aria-labelledby="solucoes-title">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow reveal">Soluções desbloqueadas</p>
+          <h2 class="section__title reveal" id="solucoes-title">O que eu posso <em>construir</em> para o seu negócio</h2>
+          <p class="section__lead reveal">Cada projeto nasce de uma pergunta simples: o que precisa acontecer para o seu cliente dizer “sim”? A partir daí, design, código e SEO trabalham juntos.</p>
+        </header>
+
+        <div class="cards">
+          <article class="card card--feature reveal">
+            <span class="card__num">01</span>
+            <h3>Sites</h3>
+            <p>Sites profissionais, elegantes e rápidos para apresentar a sua marca, os seus serviços e gerar contatos.</p>
+            <p class="card__ideal"><strong>Ideal para:</strong> empresas, profissionais liberais e negócios locais.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__num">02</span>
+            <h3>Landing pages</h3>
+            <p>Páginas com um único objetivo — vender, captar contatos ou agendar — pensadas para converter.</p>
+            <p class="card__ideal"><strong>Ideal para:</strong> lançamentos, campanhas e anúncios.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__num">03</span>
+            <h3>Portfólios</h3>
+            <p>Uma vitrine bonita e organizada para mostrar o seu trabalho e a sua trajetória com personalidade.</p>
+            <p class="card__ideal"><strong>Ideal para:</strong> criativos, freelancers e profissionais em busca de oportunidades.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__num">04</span>
+            <h3>Sistemas web</h3>
+            <p>Pequenos sistemas para organizar a rotina: cadastros, agendamentos, reservas e controles.</p>
+            <p class="card__ideal"><strong>Ideal para:</strong> quem quer sair das planilhas.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__num">05</span>
+            <h3>SEO</h3>
+            <p>Otimização para o seu site ser encontrado no Google e recomendado por assistentes de IA.</p>
+            <p class="card__ideal"><strong>Ideal para:</strong> quem quer clientes sem depender só de anúncios.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__num">06</span>
+            <h3>Manutenção</h3>
+            <p>Atualizações, ajustes e suporte para o seu site continuar rápido, seguro e em dia.</p>
+            <p class="card__ideal"><strong>Ideal para:</strong> quem quer tranquilidade depois da entrega.</p>
+          </article>
+        </div>
+
+        <div class="inline-cta reveal">
+          <p>Não sabe qual solução escolher? <strong>Me conta o seu objetivo</strong> e eu indico o melhor caminho.</p>
+          <a class="btn btn--gold" href="#contato">Conversar sobre meu projeto</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Projetos ===== -->
+    <section class="section section--dark" id="projetos" aria-labelledby="projetos-title">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow reveal">Projetos em destaque</p>
+          <h2 class="section__title reveal" id="projetos-title">Problemas reais, <em>soluções</em> sob medida</h2>
+        </header>
+
+        <div class="projects">
+          <article class="project reveal">
+            <div class="project__visual project__visual--hotel" aria-hidden="true">
+              <div class="mock">
+                <div class="mock__bar"><i></i><i></i><i></i></div>
+                <div class="mock__body">
+                  <div class="mock__side"></div>
+                  <div class="mock__grid"><b></b><b></b><b></b><b class="on"></b><b></b><b class="on"></b><b></b><b></b></div>
+                </div>
+              </div>
+            </div>
+            <div class="project__info">
+              <p class="project__kind">Sistema web · Hotelaria</p>
+              <h3>Sistema de Reservas para hotéis e pousadas</h3>
+              <p>Controle de hospedagem com check-in e check-out, registro de quartos, cadastro de hóspedes e relatório de arrecadação por período. Integrado à <strong>FNRH — Ficha Nacional de Registro de Hóspedes</strong>, nova exigência do Governo.</p>
+            </div>
+          </article>
+
+          <article class="project project--reverse reveal">
+            <div class="project__visual project__visual--zen" aria-hidden="true">
+              <div class="mock">
+                <div class="mock__bar"><i></i><i></i><i></i></div>
+                <div class="mock__body mock__body--chart">
+                  <svg viewBox="0 0 200 90"><path d="M0 70 C30 60 40 30 70 38 S110 70 140 40 S180 20 200 12" /></svg>
+                  <div class="mock__kpis"><b></b><b></b><b></b></div>
+                </div>
+              </div>
+            </div>
+            <div class="project__info">
+              <p class="project__kind">Aplicação web · Finanças</p>
+              <h3>ZenFlow — controle financeiro pessoal</h3>
+              <p>Aplicação de gestão financeira que vai além da planilha: interface moderna e intuitiva que transforma dados brutos em decisões inteligentes e traz clareza para a vida financeira do usuário.</p>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__visual project__visual--gov" aria-hidden="true">
+              <div class="mock">
+                <div class="mock__bar"><i></i><i></i><i></i></div>
+                <div class="mock__body mock__body--form"><b></b><b></b><b></b><b class="btnlike"></b></div>
+              </div>
+            </div>
+            <div class="project__info">
+              <p class="project__kind">Setor público · Interfaces</p>
+              <h3>Interfaces para serviços ao cidadão</h3>
+              <p>Na Secretaria Municipal de Inovação e Tecnologia de Garça, desenvolvo telas para projetos da equipe e analiso fluxos de trabalho para que sistemas usados por munícipes e servidores sejam mais simples e acessíveis.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Processo ===== -->
+    <section class="section" id="processo" aria-labelledby="processo-title">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow reveal">Como funciona</p>
+          <h2 class="section__title reveal" id="processo-title">Do primeiro “oi” ao <em>site no ar</em></h2>
+        </header>
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step__n">1</span>
+            <h3>Conversa &amp; diagnóstico</h3>
+            <p>Entendo o seu negócio, o seu público e o que precisa acontecer. Você recebe um orçamento claro, com escopo e prazo.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__n">2</span>
+            <h3>Estratégia &amp; protótipo</h3>
+            <p>Estruturo o conteúdo e desenho o layout no Figma. Você vê e aprova tudo antes de uma linha de código.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__n">3</span>
+            <h3>Desenvolvimento</h3>
+            <p>Código limpo, responsivo e acessível, com SEO técnico, dados estruturados e performance desde o início.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__n">4</span>
+            <h3>Lançamento &amp; suporte</h3>
+            <p>Publico, configuro o Google Search Console e acompanho os primeiros resultados com você.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Sobre mim ===== -->
+    <section class="section section--dark" id="sobre" aria-labelledby="sobre-title">
+      <div class="container about">
+        <div class="about__media reveal">
+          <img src="/camilla-pinto.jpg" width="900" height="1206" loading="lazy" alt="Camilla Pinto, analista SEO e UX designer, retrato em preto e branco" />
+        </div>
+        <div class="about__copy">
+          <p class="eyebrow reveal">Sobre mim</p>
+          <h2 class="section__title reveal" id="sobre-title">Design que encanta, estratégia que <em>traz clientes.</em></h2>
+          <p class="reveal">Sou a Camilla Pinto, analista SEO e UX designer. Ajudo empresas e profissionais a terem uma presença digital elegante, fácil de usar e encontrada por quem está procurando — no Google e nos assistentes de IA.</p>
+          <p class="reveal">Trabalho com tecnologia desde 2021, em projetos que vão do mercado financeiro a serviços públicos usados diariamente pela população. Essa bagagem me permite cuidar do seu projeto de ponta a ponta: estratégia, design, desenvolvimento e SEO, com um só ponto de contato.</p>
+          <p class="reveal">Acredito que um bom site é aquele que qualquer pessoa entende e usa sem esforço. Por isso cada entrega é bonita, mas acima de tudo clara, acessível e pensada para gerar resultado.</p>
+
+          <ul class="highlights reveal">
+            <li><strong>Desde 2021</strong><span>construindo produtos digitais</span></li>
+            <li><strong>Ponta a ponta</strong><span>estratégia, design, código e SEO num só lugar</span></li>
+            <li><strong>Inglês fluente</strong><span>projetos em português e em inglês</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container cv cv--two">
+        <div class="cv__col reveal">
+          <h3 class="cv__title">Experiência</h3>
+          <ol class="timeline">
+            <li>
+              <span class="timeline__date">2025 — atual</span>
+              <h4>Analista de Sistemas e Dev Front-end</h4>
+              <p class="timeline__org">Secretaria Municipal de Inovação e Tecnologia · Garça</p>
+              <p>Criação de interfaces e melhoria de fluxos digitais em sistemas usados por cidadãos e servidores da Prefeitura.</p>
+            </li>
+            <li>
+              <span class="timeline__date">2021 — 2023</span>
+              <h4>Desenvolvedora Back-end</h4>
+              <p class="timeline__org">Prosperità</p>
+              <p>Desenvolvimento de serviços digitais para a gestão de fundos de investimento.</p>
+            </li>
+          </ol>
+        </div>
+        <div class="cv__col reveal">
+          <h3 class="cv__title">Especialidades</h3>
+          <ul class="chips"><li>SEO</li><li>AEO &amp; GEO</li><li>UX Design</li><li>UX Research</li><li>Design de interfaces</li><li>Desenvolvimento web</li><li>Acessibilidade digital</li></ul>
+          <h3 class="cv__title">Idiomas</h3>
+          <ul class="chips"><li>Português</li><li>Inglês — fluente</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ (AEO) ===== -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq">
+        <header class="section__head section__head--left">
+          <p class="eyebrow reveal">Dúvidas frequentes</p>
+          <h2 class="section__title reveal" id="faq-title">Respostas <em>diretas</em></h2>
+          <p class="section__lead reveal">Não encontrou a sua? Me chama no WhatsApp — eu respondo pessoalmente.</p>
+        </header>
+        <div class="faq__list">
+          <details class="reveal">
+            <summary>Quanto custa criar um site profissional?</summary>
+            <p>O valor depende do tamanho do projeto, do número de páginas e das funcionalidades. Uma landing page custa menos que um site institucional completo ou um sistema. Envie uma mensagem com o que você precisa e você recebe um <strong>orçamento fechado, sem compromisso</strong>.</p>
+          </details>
+          <details class="reveal">
+            <summary>Quanto tempo leva para o site ficar pronto?</summary>
+            <p>O prazo é definido no orçamento, conforme o escopo. Landing pages costumam ser as entregas mais rápidas; sites institucionais e sistemas levam mais tempo porque passam por pesquisa, protótipo e testes.</p>
+          </details>
+          <details class="reveal">
+            <summary>Você atende clientes fora de Garça - SP?</summary>
+            <p>Sim. Atendo clientes de <strong>todo o Brasil</strong> de forma remota, com reuniões por vídeo e acompanhamento pelo WhatsApp.</p>
+          </details>
+          <details class="reveal">
+            <summary>O site vem otimizado para aparecer no Google e no ChatGPT?</summary>
+            <p>Sim. Todo projeto é entregue com SEO técnico (títulos, descrições, dados estruturados, sitemap e performance) e com práticas de <strong>AEO e GEO</strong>, que ajudam o seu negócio a ser entendido e citado por buscadores e assistentes de IA como ChatGPT, Gemini e Perplexity.</p>
+          </details>
+          <details class="reveal">
+            <summary>O que é um sistema web sob medida?</summary>
+            <p>É um software que roda no navegador e é feito para o processo da sua empresa — como controle de reservas, agendamentos, cadastro de clientes ou gestão financeira — sem as limitações de uma planilha ou de um sistema genérico.</p>
+          </details>
+          <details class="reveal">
+            <summary>Eu consigo atualizar o site depois?</summary>
+            <p>Sim. O projeto pode ser entregue com área de edição de conteúdo, e também há a opção de plano de manutenção para atualizações, melhorias e suporte contínuo.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contato ===== -->
+    <section class="section section--contact" id="contato" aria-labelledby="contato-title">
+      <div class="container contact">
+        <div class="contact__copy">
+          <p class="eyebrow reveal">Vamos conversar</p>
+          <h2 class="section__title reveal" id="contato-title">Seu próximo cliente pode estar <em>a um clique</em> de distância.</h2>
+          <p class="reveal">Conte em poucas palavras o que você precisa. A mensagem chega direto no meu WhatsApp e eu respondo pessoalmente.</p>
+          <ul class="contact__list reveal">
+            <li><a href="https://wa.me/5521981235592" target="_blank" rel="noopener">WhatsApp · (21) 98123-5592</a></li>
+            <li><a href="mailto:camilla.pintolisboa@icloud.com">camilla.pintolisboa@icloud.com</a></li>
+            <li><a href="https://www.linkedin.com/in/camilla-pinto-80017a192" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><span>Garça - SP · atendimento em todo o Brasil</span></li>
+          </ul>
+        </div>
+
+        <form class="form reveal" id="lead-form" novalidate>
+          <div class="field">
+            <label for="f-name">Seu nome</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Como posso te chamar?" />
+          </div>
+          <div class="field">
+            <label for="f-type">O que você precisa?</label>
+            <select id="f-type" name="type" required>
+              <option value="Site">Site</option>
+              <option value="Landing page">Landing page</option>
+              <option value="Portfólio">Portfólio</option>
+              <option value="Sistema web">Sistema web</option>
+              <option value="SEO">SEO</option>
+              <option value="Manutenção">Manutenção</option>
+              <option value="Ainda não sei">Ainda não sei — quero uma indicação</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-msg">Conte um pouco sobre o projeto</label>
+            <textarea id="f-msg" name="message" rows="4" placeholder="Ex.: tenho uma pousada e quero um site com reservas online"></textarea>
+          </div>
+          <button class="btn btn--gold btn--block magnetic" type="submit">
+            Enviar pelo WhatsApp
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </button>
+          <p class="form__note">Resposta pessoal · orçamento sem compromisso</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__brand"><img src="/logo.png" width="52" height="52" loading="lazy" alt="Logo Camilla Pinto" /> Camilla Pinto <em>— sites &amp; sistemas sob medida</em></p>
+      <p>Criação de sites, landing pages, portfólios e sistemas web em Garça - SP e para todo o Brasil.</p>
+      <p class="footer__copy">© <span id="year">2026</span> Camilla Pinto. Design e código feitos à mão.</p>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/5521981235592?text=Ol%C3%A1%20Camilla!%20Vim%20pelo%20seu%20site." target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3Zm0 23.6c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6Zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5v-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.8 5.2 2.8 1.1 3.4.9 4 .8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4Z" /></svg>
+  </a>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>
