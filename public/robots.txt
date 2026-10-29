@@ -17,4 +17,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://camillapinto.com.br/sitemap.xml
+Sitemap: https://meuportifolio-ab78e.web.app/sitemap.xml

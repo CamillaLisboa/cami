@@ -8,5 +8,5 @@ bun run dev      # desenvolvimento
 bun run build    # gera a pasta dist/ para publicar
 ```
 
-- Domínio: troque `https://camillapinto.com.br` pelo seu domínio real em `index.html`, `public/robots.txt`, `public/sitemap.xml` e `public/llms.txt`.
+- Publicado no Firebase Hosting: https://meuportifolio-ab78e.web.app (para publicar de novo: `bun run deploy`). Se tiver um domínio próprio, troque esse endereço em `index.html`, `public/robots.txt`, `public/sitemap.xml` e `public/llms.txt`.
 - O portfólio antigo (React + Firebase + painel /admin) está guardado em `_legacy/`.
